@@ -1,0 +1,24 @@
+databaseChangeLog:
+  - changeSet:
+      id: create user table
+      author: anhmt
+      changes:
+        - createTable:
+            schemaName: microservice-spring
+            tableName: users
+            catalogName: user-table
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+              - column:
+                  name: username
+                  type: varchar(50)
+        - createIndex:
+            indexName: idx_user_id
+            unique: true
+            schemaName: microservice-spring
+            tableName: users
+            columns:
+              - column:
+                  name: id
