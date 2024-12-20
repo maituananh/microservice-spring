@@ -1,5 +1,6 @@
 package com.anhmt.user_service.service.user;
 
+import com.anhmt.user_service.api.user.req.UserCreateReq;
 import com.anhmt.user_service.publish.user.UserPublish;
 import com.anhmt.user_service.repository.user.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -12,7 +13,7 @@ public class UserService {
     private final UserRepository userRepository;
     private final UserPublish userPublish;
 
-    public void save() {
+    public void save(final UserCreateReq userCreateReq) {
 
     }
 }

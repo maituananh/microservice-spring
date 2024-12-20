@@ -6,7 +6,7 @@ databaseChangeLog:
         - createTable:
             schemaName: microservice-spring
             tableName: users
-            catalogName: user-table
+            catalogName: microservice-spring
             columns:
               - column:
                   name: id

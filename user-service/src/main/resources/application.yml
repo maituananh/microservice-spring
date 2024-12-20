@@ -6,12 +6,21 @@ spring:
     url: jdbc:mysql://localhost:3306/microservice-spring?createDatabaseIfNotExist=true&allowPublicKeyRetrieval=true&useSSL=false&useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
     username: root
     password: r00t
+    hikari:
+      pool-name: HikariPool-1
+      auto-commit: true
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      maximum-pool-size: 1000
   jpa:
     show-sql: true
     hibernate:
-      ddl-auto: none
+      ddl-auto: validate
   liquibase:
     change-log: classpath:db/changelog/db.changelog-master.yaml
+
+client:
+  keycloak:
+    base-url:
 
 server:
   port: 8082
