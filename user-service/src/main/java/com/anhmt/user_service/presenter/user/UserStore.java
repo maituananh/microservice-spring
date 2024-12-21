@@ -11,7 +11,11 @@ public class UserStore {
 
     private final UserRepository userRepository;
 
-    public User getUser(final String username) {
+    public User get(final String username) {
         return userRepository.findByUsername(username);
+    }
+
+    public User save(final User user) {
+        return userRepository.save(user);
     }
 }
