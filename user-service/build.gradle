@@ -28,6 +28,7 @@ ext {
     set('mysqlConnector', "9.1.0")
     set('mapstructVersion', "1.6.3")
     set('projectlombok', "1.18.30")
+    set('lombokMapstructBinding', "0.2.0")
 }
 
 compileJava {
@@ -61,10 +62,13 @@ dependencies {
     // Kafka
     implementation 'org.springframework.kafka:spring-kafka'
 
+    // Support for Kafka
+    implementation("com.fasterxml.jackson.core:jackson-databind")
+
     // lombok
     compileOnly "org.projectlombok:lombok:${projectlombok}"
     annotationProcessor "org.projectlombok:lombok:${projectlombok}"
-    annotationProcessor 'org.projectlombok:lombok-mapstruct-binding:0.2.0'
+    annotationProcessor "org.projectlombok:lombok-mapstruct-binding:${lombokMapstructBinding}"
 
     // Tools
     developmentOnly 'org.springframework.boot:spring-boot-devtools'

@@ -28,6 +28,7 @@ ext {
 	set('mysqlConnector', "9.1.0")
 	set('mapstructVersion', "1.6.3")
 	set('projectlombok', "1.18.30")
+	set('lombokMapstructBinding', "0.2.0")
 }
 
 compileJava {
@@ -49,9 +50,9 @@ dependencies {
 //    implementation 'org.springframework.boot:spring-boot-starter-security'
 
 	// Database
-	implementation 'org.liquibase:liquibase-core'
-	implementation "com.mysql:mysql-connector-j:${mysqlConnector}"
-	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+//	implementation 'org.liquibase:liquibase-core'
+//	implementation "com.mysql:mysql-connector-j:${mysqlConnector}"
+//	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 
 	// mapstruct
 	implementation "org.mapstruct:mapstruct:${mapstructVersion}"
@@ -64,7 +65,7 @@ dependencies {
 	// lombok
 	compileOnly "org.projectlombok:lombok:${projectlombok}"
 	annotationProcessor "org.projectlombok:lombok:${projectlombok}"
-	annotationProcessor 'org.projectlombok:lombok-mapstruct-binding:0.2.0'
+	annotationProcessor "org.projectlombok:lombok-mapstruct-binding:${lombokMapstructBinding}"
 
 	// Tools
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'

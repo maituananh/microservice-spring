@@ -1,4 +1,4 @@
-package com.anhmt.user_service.publish.user.model;
+package com.anhmt.user_service.publisher.user.model;
 
 public enum UserPublisherEnum {
     SEND_MAIL,

@@ -4,9 +4,9 @@ databaseChangeLog:
       author: anhmt
       changes:
         - createTable:
-            schemaName: microservice-spring
+            schemaName: mcs-user
             tableName: users
-            catalogName: microservice-spring
+            catalogName: mcs-user
             columns:
               - column:
                   name: id
@@ -17,7 +17,7 @@ databaseChangeLog:
         - createIndex:
             indexName: idx_user_id
             unique: true
-            schemaName: microservice-spring
+            schemaName: mcs-user
             tableName: users
             columns:
               - column:

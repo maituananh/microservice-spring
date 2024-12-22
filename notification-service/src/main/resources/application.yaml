@@ -1,5 +1,36 @@
 spring:
   application:
     name: notification-service
+
+#  datasource:
+#    driver-class-name: com.mysql.cj.jdbc.Driver
+#    url: jdbc:mysql://localhost:3306/mcs-notification?createDatabaseIfNotExist=true&allowPublicKeyRetrieval=true&useSSL=false&useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
+#    username: root
+#    password: r00t
+#    hikari:
+#      pool-name: HikariPool-1
+#      auto-commit: true
+#      driver-class-name: com.mysql.cj.jdbc.Driver
+#      maximum-pool-size: 1000
+#  jpa:
+#    show-sql: true
+#    hibernate:
+#      ddl-auto: validate
+#  liquibase:
+#    change-log: classpath:db/changelog/db.changelog-master.yaml
+
+  kafka:
+    group:
+      user: user_notification_group
+    topic:
+      user: user_notification_topic
+    bootstrap-servers:
+      - localhost:29092
+      - localhost:29093
+      - localhost:29094
+    consumer:
+      value-deserializer: org.apache.kafka.common.serialization.ByteArrayDeserializer
+      auto-offset-reset: earliest
+
 server:
   port: 8081
