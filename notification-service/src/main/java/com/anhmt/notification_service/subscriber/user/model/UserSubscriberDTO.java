@@ -1,4 +1,4 @@
-package com.anhmt.user_service.publish.user.model;
+package com.anhmt.notification_service.subscriber.user.model;
 
 import lombok.*;
 
@@ -9,9 +9,9 @@ import java.util.UUID;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserPublisher {
+public class UserSubscriberDTO {
     private UUID id;
     private Long userId;
-    private UserPublisherEnum event;
+    private UserSubscriberEnum event;
     private String data;
 }

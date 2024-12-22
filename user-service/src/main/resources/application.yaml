@@ -3,7 +3,7 @@ spring:
     name: user-service
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/microservice-spring?createDatabaseIfNotExist=true&allowPublicKeyRetrieval=true&useSSL=false&useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
+    url: jdbc:mysql://localhost:3306/mcs-user?createDatabaseIfNotExist=true&allowPublicKeyRetrieval=true&useSSL=false&useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
     username: root
     password: r00t
     hikari:
@@ -19,6 +19,8 @@ spring:
     change-log: classpath:db/changelog/db.changelog-master.yaml
 
   kafka:
+    topic:
+      user: user_notification_topic
     bootstrap-servers:
       - localhost:29092
       - localhost:29093
@@ -26,14 +28,15 @@ spring:
     producer:
       acks: -1
       retries: 1
-      value-serializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
       properties:
         "enable.idempotence": "true"
         "max.in.flight.requests.per.connection": "5"
 
 client:
   keycloak:
-    base-url:
+    base-url: ""
 
 server:
   port: 8082
