@@ -19,10 +19,17 @@ public class UserPublisher {
     private final KafkaProperties kafkaProperties;
 
     public void publish(final UserCreateReq userCreateReq) {
-        UserPublisherDTO userPublisherDTO = UserPublisherMapper.INSTANCE.toUserPublisher(userCreateReq, UserPublisherEnum.CREATE_USER);
+        UserPublisherDTO userPublisherDTO = UserPublisherMapper.INSTANCE.toUserPublisher(userCreateReq,
+                UserPublisherEnum.CREATE_USER);
 
-        kafkaTemplate.send(kafkaProperties.getTopic().getUser(), userPublisherDTO);
+        kafkaTemplate.send(kafkaProperties.getTopic().getUser(), userPublisherDTO)
+                .whenCompleteAsync((result, ex) -> {
+                    if (ex != null) {
+                        log.error(ex.getMessage());
+                        return;
+                    }
 
-        log.info("Publishing user {}", userPublisherDTO);
+                    log.info("Completed: {}", result.getProducerRecord().value().toString());
+                });
     }
 }

@@ -14,11 +14,8 @@ public class KafkaConfiguration {
 
     @Bean
     NewTopic userTopic() {
-        return new NewTopic(kafkaProperties.getTopic().getUser(), 2, (short) 1);
+        return new NewTopic(kafkaProperties.getTopic().getUser(),
+                kafkaProperties.getPartition().getUser(),
+                kafkaProperties.getReplication().getUser());
     }
-
-//    @Bean
-//    NewTopic userTopic() {
-//        return new NewTopic(USER_NOTIFICATION_TOPIC, 2, (short) 1);
-//    }
 }

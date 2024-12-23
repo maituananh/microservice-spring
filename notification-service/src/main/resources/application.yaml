@@ -20,10 +20,16 @@ spring:
 #    change-log: classpath:db/changelog/db.changelog-master.yaml
 
   kafka:
+    partition:
+      user-dlt: 1
+    replication:
+      user-dlt: 2
     group:
       user: user_notification_group
     topic:
       user: user_notification_topic
+      user-dlt: user_notification_dlt_topic
+
     bootstrap-servers:
       - localhost:29092
       - localhost:29093
@@ -31,6 +37,8 @@ spring:
     consumer:
       value-deserializer: org.apache.kafka.common.serialization.ByteArrayDeserializer
       auto-offset-reset: earliest
+    producer:
+      value-serializer: org.apache.kafka.common.serialization.ByteArraySerializer
 
 server:
   port: 8081
