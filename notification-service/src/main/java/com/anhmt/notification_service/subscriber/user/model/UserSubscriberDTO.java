@@ -9,6 +9,7 @@ import java.util.UUID;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString
 public class UserSubscriberDTO {
     private UUID id;
     private Long userId;

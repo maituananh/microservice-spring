@@ -16,7 +16,7 @@ public class UserSubscriber {
 
     @KafkaListener(groupId = "${spring.kafka.group.user}", topics = "${spring.kafka.topic.user}")
     public void listen(final UserSubscriberDTO userSubscriberDTO) {
-        log.info("Received user subscriber: {}", userSubscriberDTO);
+        log.info("Received user subscriber: {}", userSubscriberDTO.toString());
         emailService.sendEmail(null);
     }
 }

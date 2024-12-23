@@ -11,11 +11,25 @@ import org.springframework.stereotype.Component;
 @ConfigurationProperties(prefix = "spring.kafka")
 public class KafkaProperties {
 
-    private KafkaTopics topic;
+    private KafkaTopic topic;
+    private KafkaReplication replication;
+    private KafkaPartition partition;
 
     @Setter
     @Getter
-    public static class KafkaTopics {
+    public static class KafkaTopic {
         private String user;
+    }
+
+    @Setter
+    @Getter
+    public static class KafkaReplication {
+        private short user;
+    }
+
+    @Setter
+    @Getter
+    public static class KafkaPartition {
+        private int user;
     }
 }
