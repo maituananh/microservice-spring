@@ -1,4 +1,4 @@
-package com.anhmt.user_service.api.user.req;
+package com.anhmt.user_service.command.api.user.req;
 
 import lombok.*;
 

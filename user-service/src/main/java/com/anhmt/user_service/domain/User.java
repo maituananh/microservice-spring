@@ -1,13 +1,12 @@
 package com.anhmt.user_service.domain;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
-@Entity
-@Table(schema = "microservice-spring", name = "users")
+import java.util.UUID;
+
+@Entity(name = "users")
+@Table(name = "users", schema = "mcs-user")
 @Setter
 @Getter
 @AllArgsConstructor
@@ -15,8 +14,7 @@ import lombok.Setter;
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
+    UUID id;
 
     @Column(unique = true)
     String username;

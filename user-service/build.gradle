@@ -42,6 +42,10 @@ compileJava {
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
 
+    // AXON FRAMEWORK
+    implementation 'org.axonframework:axon-spring-boot-starter:4.9.1'
+    implementation 'com.google.protobuf:protobuf-java:3.25.5'
+
     // Cloud
     implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
 
