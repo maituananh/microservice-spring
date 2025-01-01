@@ -1,0 +1,19 @@
+server:
+  port: 8025
+
+spring:
+  application:
+    name: room-service
+  kafka:
+    group:
+      room: room_group_id
+    topic:
+      room: room_topic
+    bootstrap-servers:
+      - localhost:29092
+      - localhost:29093
+    consumer:
+      value-deserializer: org.apache.kafka.common.serialization.ByteArrayDeserializer
+      auto-offset-reset: earliest
+    producer:
+      value-serializer: org.apache.kafka.common.serialization.ByteArraySerializer

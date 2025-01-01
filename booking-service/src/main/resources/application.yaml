@@ -1,16 +1,15 @@
 server:
-  port: 8080
-
+  port: 8083
 spring:
   application:
-    name: bff-service
+    name: booking-service
   kafka:
     partition:
-      room: 2
+      user: 2
     replication:
-      room: 2 #2 kafka brokers
+      user: 2 #2 kafka brokers
     topic:
-      room: room_topic
+      user: user_notification_topic
     bootstrap-servers:
       - localhost:29092
       - localhost:29093
@@ -23,14 +22,3 @@ spring:
         "request.timeout.ms": "300" # if in 3s can not send message => fail
         "enable.idempotence": "true"
         "max.in.flight.requests.per.connection": "5"
-
-client:
-  user-client:
-    name: user-client
-    url: localhost:8082
-  room-client:
-    name: room-client
-    url: localhost:8025
-  booking-client:
-    name: booking-client
-    url: localhost:8083

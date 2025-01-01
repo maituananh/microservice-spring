@@ -21,4 +21,9 @@ public class UserQueryController {
     public ResponseEntity<List<UserFetchingAllRes>> getAll() {
         return ResponseEntity.ok(userQueryService.getAll());
     }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<?> getUserDetail() {
+        return ResponseEntity.ok(userQueryService.getAll());
+    }
 }

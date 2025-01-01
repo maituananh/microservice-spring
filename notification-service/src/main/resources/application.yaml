@@ -28,7 +28,6 @@ spring:
     topic:
       user: user_notification_topic
       user-dlt: user_notification_dlt_topic
-
     bootstrap-servers:
       - localhost:29092
       - localhost:29093
