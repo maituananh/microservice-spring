@@ -1,0 +1,24 @@
+server:
+  port: 8083
+spring:
+  application:
+    name: booking-service
+  kafka:
+    partition:
+      user: 2
+    replication:
+      user: 2 #2 kafka brokers
+    topic:
+      user: user_notification_topic
+    bootstrap-servers:
+      - localhost:29092
+      - localhost:29093
+    producer:
+      acks: -1
+      retries: 5 # re-send 5 times
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      properties:
+        "request.timeout.ms": "300" # if in 3s can not send message => fail
+        "enable.idempotence": "true"
+        "max.in.flight.requests.per.connection": "5"

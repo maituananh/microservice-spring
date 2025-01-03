@@ -4,7 +4,6 @@ services:
 # ==== START MYSQL ====
   mysql:
     image: mysql:8.4
-    restart: always
     ports:
       - 3306:3306
     volumes:
@@ -13,6 +12,18 @@ services:
       MYSQL_ROOT_PASSWORD: r00t
       MYSQL_PASS: r00t
 # ==== END MYSQL ====
+
+# ==== START AXON SERVER ====
+  axon-server:
+    image: axoniq/axonserver
+    healthcheck:
+      test: curl -f http://localhost:8024/actuator/health || exit 1;
+    ports:
+      - 8024:8024
+      - 8124:8124
+    environment:
+      AXONIQ_AXONSERVER_STANDALONE: "true"
+# ==== END AXON SERVER ====
 
 # ==== START KAFKA ====
   zookeeper:
@@ -38,6 +49,11 @@ services:
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
       KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_LOG4J_LOGGERS: "kafka.controller=INFO,kafka.producer.async.DefaultEventHandler=INFO,state.change.logger=INFO"
+      CONFLUENT_METRICS_REPORTER_BOOTSTRAP_SERVERS: kafka-broker-1:29092
+      CONFLUENT_METRICS_REPORTER_TOPIC_REPLICAS: 2
+      CONFLUENT_METRICS_ENABLE: 'true'
+      CONFLUENT_SUPPORT_CUSTOMER_ID: 'anonymous'
     networks:
       - kafka-net
 
@@ -54,68 +70,58 @@ services:
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
       KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_LOG4J_LOGGERS: "kafka.controller=INFO,kafka.producer.async.DefaultEventHandler=INFO,state.change.logger=INFO"
+      CONFLUENT_METRICS_REPORTER_BOOTSTRAP_SERVERS: kafka-broker-2:29093
+      CONFLUENT_METRICS_REPORTER_TOPIC_REPLICAS: 2
+      CONFLUENT_METRICS_ENABLE: 'true'
+      CONFLUENT_SUPPORT_CUSTOMER_ID: 'anonymous'
     networks:
       - kafka-net
 
-  kafka-broker-3:
-    image: confluentinc/cp-kafka:7.4.4
-    depends_on:
-      - zookeeper
-    ports:
-      - 29094:29094
-    environment:
-      KAFKA_BROKER_ID: 3
-      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
-      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka-broker-3:9092,PLAINTEXT_HOST://localhost:29094
-      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
-      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
-      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
-    networks:
-      - kafka-net
 # ==== END KAFKA ====
 
 # ==== START KEYCLOAK ====
 # http://localhost:7080/admin
-  postgres:
-    image: postgres:16.2
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
-    environment:
-      POSTGRES_DB: keycloak_db
-      POSTGRES_USER: keycloak_db_user
-      POSTGRES_PASSWORD: keycloak_db_user_password
-    networks:
-      - keycloak_network
-
-  keycloak: 
-    image: quay.io/keycloak/keycloak:24.0
-    environment:
-      KC_HOSTNAME: localhost
-      KC_HOSTNAME_PORT: 7080
-      KC_HOSTNAME_STRICT_BACKCHANNEL: "true"
-      KC_HTTP_ENABLED: "true"
-      KC_HOSTNAME_STRICT_HTTPS: "false"
-      KEYCLOAK_ADMIN: admin
-      KEYCLOAK_ADMIN_PASSWORD: admin
-      KC_HEALTH_ENABLED: "true"
-      KC_LOG_LEVEL: info
-      KC_DB: postgres
-      KC_DB_URL: jdbc:postgresql://postgres/keycloak_db
-      KC_DB_USERNAME: keycloak_db_user
-      KC_DB_PASSWORD: keycloak_db_user_password
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:7080/health/ready"]
-      interval: 15s
-      timeout: 2s
-      retries: 15
-    command: ["start-dev", "--http-port", "7080", "--https-port", "7443"]
-    ports:
-      - "7080:7080"
-      - "7443:7443"
-    networks:
-      - keycloak_network
-    depends_on:
-      - postgres
+#  postgres:
+#    image: postgres:16.2
+#    volumes:
+#      - postgres_data:/var/lib/postgresql/data
+#    environment:
+#      POSTGRES_DB: keycloak_db
+#      POSTGRES_USER: keycloak_db_user
+#      POSTGRES_PASSWORD: keycloak_db_user_password
+#    networks:
+#      - keycloak_network
+#
+#  keycloak:
+#    image: quay.io/keycloak/keycloak:24.0
+#    environment:
+#      KC_HOSTNAME: localhost
+#      KC_HOSTNAME_PORT: 7080
+#      KC_HOSTNAME_STRICT_BACKCHANNEL: "true"
+#      KC_HTTP_ENABLED: "true"
+#      KC_HOSTNAME_STRICT_HTTPS: "false"
+#      KEYCLOAK_ADMIN: admin
+#      KEYCLOAK_ADMIN_PASSWORD: admin
+#      KC_HEALTH_ENABLED: "true"
+#      KC_LOG_LEVEL: info
+#      KC_DB: postgres
+#      KC_DB_URL: jdbc:postgresql://postgres/keycloak_db
+#      KC_DB_USERNAME: keycloak_db_user
+#      KC_DB_PASSWORD: keycloak_db_user_password
+#    healthcheck:
+#      test: ["CMD", "curl", "-f", "http://localhost:7080/health/ready"]
+#      interval: 15s
+#      timeout: 2s
+#      retries: 15
+#    command: ["start-dev", "--http-port", "7080", "--https-port", "7443"]
+#    ports:
+#      - "7080:7080"
+#      - "7443:7443"
+#    networks:
+#      - keycloak_network
+#    depends_on:
+#      - postgres
 # ==== END KEYCLOAK ==== 
 
 
@@ -127,5 +133,5 @@ volumes:
 networks:
   kafka-net:
     driver: bridge
-  keycloak_network:
-    driver: bridge
+#  keycloak_network:
+#    driver: bridge

@@ -1,0 +1,31 @@
+databaseChangeLog:
+  - changeSet:
+      id: create_room_table
+      author: anhmt
+      changes:
+        - createTable:
+            schemaName: mcs-room
+            tableName: rooms
+            catalogName: mcs-room
+            columns:
+              - column:
+                  name: id
+                  type: varchar(40)
+              - column:
+                  name: name
+                  type: varchar(50)
+              - column:
+                  name: created_by
+                  type: varchar(50)
+              - column:
+                  name: created_at
+                  type: TIMESTAMP
+                  defaultValueComputed: CURRENT_TIMESTAMP
+        - createIndex:
+            indexName: idx_room_id
+            unique: true
+            schemaName: mcs-room
+            tableName: rooms
+            columns:
+              - column:
+                  name: id

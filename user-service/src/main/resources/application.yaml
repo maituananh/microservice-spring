@@ -10,11 +10,13 @@ spring:
       pool-name: HikariPool-1
       auto-commit: true
       driver-class-name: com.mysql.cj.jdbc.Driver
-      maximum-pool-size: 1000
   jpa:
     show-sql: true
     hibernate:
-      ddl-auto: validate
+      ddl-auto: update
+      naming:
+        implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyJpaImpl
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
   liquibase:
     change-log: classpath:db/changelog/db.changelog-master.yaml
 
@@ -22,13 +24,12 @@ spring:
     partition:
       user: 2
     replication:
-      user: 3 # 3 kafka brokers
+      user: 2 #2 kafka brokers
     topic:
       user: user_notification_topic
     bootstrap-servers:
       - localhost:29092
       - localhost:29093
-      - localhost:29094
     producer:
       acks: -1
       retries: 5 # re-send 5 times
@@ -39,10 +40,19 @@ spring:
         "enable.idempotence": "true"
         "max.in.flight.requests.per.connection": "5"
 
+axon:
+  eventhandling:
+    processors:
+      NAME_OF_THE_PROCESSOR:
+        mode: tracking
+  axonserver:
+    context: default
+    enabled: true
+    servers: localhost
+
 client:
   keycloak:
     base-url: ""
 
 server:
   port: 8082
-

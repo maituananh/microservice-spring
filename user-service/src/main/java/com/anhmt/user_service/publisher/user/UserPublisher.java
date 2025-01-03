@@ -1,6 +1,6 @@
 package com.anhmt.user_service.publisher.user;
 
-import com.anhmt.user_service.api.user.req.UserCreateReq;
+import com.anhmt.user_service.command.api.user.req.UserCreateReq;
 import com.anhmt.user_service.properties.KafkaProperties;
 import com.anhmt.user_service.publisher.user.mapper.UserPublisherMapper;
 import com.anhmt.user_service.publisher.user.model.UserPublisherDTO;
