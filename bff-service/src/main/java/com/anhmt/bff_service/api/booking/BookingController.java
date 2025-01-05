@@ -1,22 +1,20 @@
 package com.anhmt.bff_service.api.booking;
 
-import com.anhmt.bff_service.api.booking.request.BookingRoomCreationRequest;
+import com.anhmt.bff_service.api.booking.request.BookingRoomCreationInput;
 import com.anhmt.bff_service.services.BookingService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.graphql.data.method.annotation.Argument;
+import org.springframework.graphql.data.method.annotation.MutationMapping;
+import org.springframework.stereotype.Controller;
 
-@RestController
+@Controller
 @RequiredArgsConstructor
-@RequestMapping("api/v1/booking")
 public class BookingController {
 
     private final BookingService bookingService;
 
-    @PostMapping
-    public void createBooking(@RequestBody BookingRoomCreationRequest bookingRoomCreationRequest) {
-        bookingService.bookRoom(bookingRoomCreationRequest);
+    @MutationMapping
+    public void createBooking(@Argument BookingRoomCreationInput bookingRoomCreationInput) {
+        bookingService.bookRoom(bookingRoomCreationInput);
     }
 }

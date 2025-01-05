@@ -10,7 +10,7 @@ import java.util.UUID;
 @Getter
 @Setter
 @Builder
-public class BookingRoomCreationRequest {
+public class BookingRoomCreationInput {
 
     @Nonnull
     private UUID userId;

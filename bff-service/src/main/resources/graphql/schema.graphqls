@@ -1,0 +1,38 @@
+# ==== BOOKING
+input BookingRoomCreationInput {
+    userId: String!,
+    roomId: String!
+}
+
+# ==== USER
+input UserCreationInput {
+    username: String!,
+    password: String!,
+    email: String!
+}
+
+input UserUpdatingInput {
+    id: ID!,
+    username: String!,
+    email: String!
+}
+
+type User {
+    id: ID!,
+    username: String!,
+    email: String
+}
+
+# ==== QUERY ====
+type Query {
+    fetchAllUsers: [User!]
+}
+
+# ==== MUTATION ====
+type Mutation {
+    createBooking(bookingRoomCreationInput: BookingRoomCreationInput!): String!
+
+    createUser(userCreationInput: UserCreationInput!): ID!
+    deleteUserById(id: ID!): ID!
+    updateUserById(userUpdatingInput: UserUpdatingInput!): ID!
+}

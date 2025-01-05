@@ -2,12 +2,11 @@ package com.anhmt.bff_service.services;
 
 import com.anhmt.bff_service.adapter.room.RoomAdapter;
 import com.anhmt.bff_service.adapter.user.UserAdapter;
-import com.anhmt.bff_service.api.booking.request.BookingRoomCreationRequest;
+import com.anhmt.bff_service.api.booking.request.BookingRoomCreationInput;
 import com.anhmt.bff_service.domain.Room;
 import com.anhmt.bff_service.domain.User;
 import com.anhmt.bff_service.producer.booking.BookingProducer;
 import com.anhmt.bff_service.producer.booking.mapper.BookingProducerMapper;
-import com.anhmt.bff_service.producer.booking.model.BookingCreationProducer;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -22,7 +21,7 @@ public class BookingService {
     private final UserAdapter userAdapter;
     private final BookingProducer bookingProducer;
 
-    public void bookRoom(final BookingRoomCreationRequest req) {
+    public void bookRoom(final BookingRoomCreationInput req) {
         var roomCf = asyncGetRoomById(req.getRoomId());
         var userCf = asyncGetUserById(req.getUserId());
 

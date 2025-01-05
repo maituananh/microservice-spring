@@ -36,6 +36,9 @@ dependencies {
 	//	cloud
 	implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
 
+	//	graphql
+	implementation 'org.springframework.boot:spring-boot-starter-graphql'
+
 	//	kafka
 	implementation 'org.springframework.kafka:spring-kafka'
 
@@ -43,6 +46,7 @@ dependencies {
 	implementation "org.mapstruct:mapstruct:${mapstructVersion}"
 	annotationProcessor "org.mapstruct:mapstruct-processor:${mapstructVersion}"
 	testAnnotationProcessor "org.mapstruct:mapstruct-processor:${mapstructVersion}"
+	annotationProcessor "org.projectlombok:lombok-mapstruct-binding:${lombokMapstructBinding}"
 
 	//	tool
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'

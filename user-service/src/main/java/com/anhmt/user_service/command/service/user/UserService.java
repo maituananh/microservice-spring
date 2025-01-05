@@ -1,7 +1,9 @@
 package com.anhmt.user_service.command.service.user;
 
+import com.anhmt.user_service.command.api.user.UserMapper;
 import com.anhmt.user_service.command.api.user.req.UserCreateReq;
 import com.anhmt.user_service.command.api.user.req.UserUpdateReq;
+import com.anhmt.user_service.command.api.user.res.UserUpdatingResponse;
 import com.anhmt.user_service.command.command.UserCreationCommand;
 import com.anhmt.user_service.command.command.UserDeletingCommand;
 import com.anhmt.user_service.command.command.UserUpdatingCommand;
@@ -18,18 +20,20 @@ public class UserService {
 
     private final CommandGateway commandGateway;
 
-    public void create(final UserCreateReq userCreateReq) {
+    public UUID create(final UserCreateReq userCreateReq) {
         UserCreationCommand command = UserCommandMapper.INSTANCE.toUserCreationCommand(userCreateReq);
-        commandGateway.send(command);
+        return commandGateway.sendAndWait(command);
     }
 
-    public void update(final UUID id, final UserUpdateReq req) {
+    public UserUpdatingResponse update(final UUID id, final UserUpdateReq req) {
         UserUpdatingCommand command = UserCommandMapper.INSTANCE.toUserUpdatingCommand(id, req);
-        commandGateway.send(command);
+        commandGateway.sendAndWait(command);
+        return UserMapper.INSTANCE.toUserUpdatingResponse(command);
     }
 
-    public void delete(final UUID id) {
-        UserDeletingCommand userDeletingCommand = UserCommandMapper.INSTANCE.toUserDeletingCommand(id);
-        commandGateway.send(userDeletingCommand);
+    public UUID delete(final UUID id) {
+        UserDeletingCommand command = UserCommandMapper.INSTANCE.toUserDeletingCommand(id);
+        commandGateway.sendAndWait(command);
+        return command.getId();
     }
 }
