@@ -27,20 +27,15 @@ public class UserAdapter {
 
     public User createUser(final User user) {
         var id = userClient.createNewUser(UserAdapterMapper.INSTANCE.toUserCreationClientRequest(user));
-        log.info("User created {}", id);
         return UserAdapterMapper.INSTANCE.toUser(id);
     }
 
     public UUID updateUserById(final User user) {
-        var id = userClient.updateUserById(user.getId(),
+        return userClient.updateUserById(user.getId(),
                 UserAdapterMapper.INSTANCE.toUserUpdatingClientRequest(user));
-        log.info("User updated {}", id);
-        return id;
     }
 
     public UUID deleteUserById(final UUID id) {
-        var responseId = userClient.deleteUserById(id);
-        log.info("User with id {} was successfully deleted", responseId);
-        return responseId;
+        return userClient.deleteUserById(id);
     }
 }

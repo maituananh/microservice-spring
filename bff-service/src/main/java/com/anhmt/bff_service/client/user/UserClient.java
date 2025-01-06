@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.UUID;
 
-@FeignClient(name = "${client.user-client.name}", url = "${client.user-client.url}")
+@FeignClient(name = "${client.user-client.name}", url = "${client.user-client.url}", configuration = FeignClient.class)
 public interface UserClient {
 
     @GetMapping("api/v1/users")

@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import java.util.List;
 import java.util.UUID;
 
-@FeignClient(name = "${client.room-client.name}", url = "${client.room-client.url}")
+@FeignClient(name = "${client.room-client.name}", url = "${client.room-client.url}", configuration = FeignClient.class)
 public interface RoomClient {
 
     @GetMapping("api/v1/rooms")

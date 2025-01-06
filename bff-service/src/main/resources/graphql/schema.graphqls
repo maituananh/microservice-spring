@@ -4,6 +4,11 @@ input BookingRoomCreationInput {
     roomId: String!
 }
 
+type Room {
+    id: ID!,
+    name: String
+}
+
 # ==== USER
 input UserCreationInput {
     username: String!,
@@ -25,6 +30,8 @@ type User {
 
 # ==== QUERY ====
 type Query {
+    fetchAllRooms: [Room!]
+
     fetchAllUsers: [User!]
 }
 
