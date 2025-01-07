@@ -14,7 +14,8 @@ public class BookingController {
     private final BookingService bookingService;
 
     @MutationMapping
-    public void createBooking(@Argument BookingRoomCreationInput bookingRoomCreationInput) {
+    public String createBooking(@Argument BookingRoomCreationInput bookingRoomCreationInput) {
         bookingService.bookRoom(bookingRoomCreationInput);
+        return "Your room are updating";
     }
 }

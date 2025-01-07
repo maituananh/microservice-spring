@@ -1,4 +1,4 @@
-package com.anhmt.bff_service.api.booking.request;
+package com.anhmt.booking_service.consumer.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -11,7 +11,7 @@ import java.util.UUID;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class BookingRoomCreationInput {
+public class BookingRoomDto {
     private UUID userId;
     private UUID roomId;
 }

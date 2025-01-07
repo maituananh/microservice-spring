@@ -1,24 +1,39 @@
 server:
   port: 8083
+
 spring:
   application:
     name: booking-service
+
   kafka:
-    partition:
-      user: 2
-    replication:
-      user: 2 #2 kafka brokers
+    group:
+      booking-room: booking_room_group
     topic:
-      user: user_notification_topic
+      booking-room: booking_room_topic
     bootstrap-servers:
       - localhost:29092
       - localhost:29093
+    consumer:
+      value-deserializer: org.apache.kafka.common.serialization.ByteArrayDeserializer
+      auto-offset-reset: earliest
     producer:
-      acks: -1
-      retries: 5 # re-send 5 times
-      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
-      key-serializer: org.apache.kafka.common.serialization.StringSerializer
-      properties:
-        "request.timeout.ms": "300" # if in 3s can not send message => fail
-        "enable.idempotence": "true"
-        "max.in.flight.requests.per.connection": "5"
+      value-serializer: org.apache.kafka.common.serialization.ByteArraySerializer
+
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/mcs-booking?createDatabaseIfNotExist=true&allowPublicKeyRetrieval=true&useSSL=false&useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
+    username: root
+    password: r00t
+    hikari:
+      pool-name: HikariPool-1
+      auto-commit: true
+      driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+      naming:
+        implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyJpaImpl
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+  liquibase:
+    change-log: classpath:db/changelog/db.changelog-master.yaml

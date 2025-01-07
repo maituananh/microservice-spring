@@ -18,4 +18,11 @@ public class KafkaConfiguration {
                 kafkaProperties.getPartition().getRoom(),
                 kafkaProperties.getReplication().getRoom());
     }
+
+    @Bean
+    NewTopic bookingRoomTopic() {
+        return new NewTopic(kafkaProperties.getTopic().getBookingRoom(),
+                kafkaProperties.getPartition().getBookingRoom(),
+                kafkaProperties.getReplication().getBookingRoom());
+    }
 }
