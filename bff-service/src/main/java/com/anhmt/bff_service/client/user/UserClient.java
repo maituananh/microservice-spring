@@ -1,5 +1,6 @@
 package com.anhmt.bff_service.client.user;
 
+import com.anhmt.bff_service.client.configuration.FeignConfig;
 import com.anhmt.bff_service.client.user.request.UserCreationClientRequest;
 import com.anhmt.bff_service.client.user.request.UserUpdatingClientRequest;
 import com.anhmt.bff_service.client.user.response.UserClientResponse;
@@ -9,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.UUID;
 
-@FeignClient(name = "${client.user-client.name}", url = "${client.user-client.url}", configuration = FeignClient.class)
+@FeignClient(name = "${client.user-client.name}", url = "${client.user-client.url}", configuration = FeignConfig.class)
 public interface UserClient {
 
     @GetMapping("api/v1/users")

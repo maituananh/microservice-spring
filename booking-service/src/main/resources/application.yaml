@@ -10,6 +10,7 @@ spring:
       booking-room: booking_room_group
     topic:
       booking-room: booking_room_topic
+      booking-room-reply: booking_room_reply_topic
     bootstrap-servers:
       - localhost:29092
       - localhost:29093
