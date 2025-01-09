@@ -7,6 +7,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.UUID;
+
 @Service
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
@@ -15,8 +17,8 @@ public class BookingRoomStore {
     private final BookingRoomRepository bookingRoomRepository;
 
     @Transactional
-    public void save(final BookingRoom bookingRoom) {
+    public UUID save(final BookingRoom bookingRoom) {
         var entity = BookingRoomMapper.INSTANCE.toBookingRoomEntity(bookingRoom);
-        bookingRoomRepository.save(entity);
+        return bookingRoomRepository.save(entity).getId();
     }
 }

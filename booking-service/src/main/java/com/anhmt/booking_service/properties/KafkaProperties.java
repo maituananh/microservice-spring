@@ -1,4 +1,4 @@
-package com.anhmt.bff_service.properties;
+package com.anhmt.booking_service.properties;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -12,8 +12,6 @@ import org.springframework.stereotype.Component;
 public class KafkaProperties {
 
     private KafkaTopic topic;
-    private KafkaReplication replication;
-    private KafkaPartition partition;
 
     @Setter
     @Getter
@@ -21,19 +19,5 @@ public class KafkaProperties {
         private String room;
         private String bookingRoom;
         private String bookingRoomReply;
-    }
-
-    @Setter
-    @Getter
-    public static class KafkaReplication {
-        private short room;
-        private short bookingRoom;
-    }
-
-    @Setter
-    @Getter
-    public static class KafkaPartition {
-        private int room;
-        private int bookingRoom;
     }
 }
