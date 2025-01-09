@@ -19,17 +19,20 @@ public class KafkaProperties {
     @Getter
     public static class KafkaTopic {
         private String room;
+        private String bookingRoom;
     }
 
     @Setter
     @Getter
     public static class KafkaReplication {
         private short room;
+        private short bookingRoom;
     }
 
     @Setter
     @Getter
     public static class KafkaPartition {
         private int room;
+        private int bookingRoom;
     }
 }

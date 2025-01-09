@@ -24,4 +24,18 @@ public class UserAdapter {
     public List<User> getAllUsers() {
         return UserAdapterMapper.INSTANCE.toUsers(userClient.getAllUsers());
     }
+
+    public User createUser(final User user) {
+        var id = userClient.createNewUser(UserAdapterMapper.INSTANCE.toUserCreationClientRequest(user));
+        return UserAdapterMapper.INSTANCE.toUser(id);
+    }
+
+    public UUID updateUserById(final User user) {
+        return userClient.updateUserById(user.getId(),
+                UserAdapterMapper.INSTANCE.toUserUpdatingClientRequest(user));
+    }
+
+    public UUID deleteUserById(final UUID id) {
+        return userClient.deleteUserById(id);
+    }
 }

@@ -1,29 +1,41 @@
 package com.anhmt.bff_service.api.user;
 
-import lombok.AccessLevel;
+import com.anhmt.bff_service.api.user.input.UserCreationInput;
+import com.anhmt.bff_service.api.user.input.UserUpdatingInput;
+import com.anhmt.bff_service.api.user.output.UserOutput;
+import com.anhmt.bff_service.services.UserService;
 import lombok.RequiredArgsConstructor;
-import lombok.experimental.FieldDefaults;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.graphql.data.method.annotation.Argument;
+import org.springframework.graphql.data.method.annotation.MutationMapping;
+import org.springframework.graphql.data.method.annotation.QueryMapping;
+import org.springframework.stereotype.Controller;
 
-@FieldDefaults(makeFinal = true, level = AccessLevel.PRIVATE)
-@RestController
+import java.util.List;
+import java.util.UUID;
+
+@Controller
 @RequiredArgsConstructor
-@RequestMapping("api/v1/users")
 public class UserController {
 
-    @PostMapping
-    public void createUser() {
-//        userService.save();
+    private final UserService userService;
 
+    @MutationMapping
+    public UUID createUser(@Argument UserCreationInput userCreationInput) {
+        return userService.createNewUser(userCreationInput);
     }
 
-    @PutMapping
-    public void updateUser() {
-
+    @MutationMapping
+    public UUID updateUserById(@Argument UserUpdatingInput userUpdatingInput) {
+        return userService.updateUserById(userUpdatingInput);
     }
 
-    @GetMapping
-    public String getUser() {
-        return "Hello World";
+    @MutationMapping
+    public UUID deleteUserById(@Argument UUID id) {
+        return userService.deleteUserById(id);
+    }
+
+    @QueryMapping
+    public List<UserOutput> fetchAllUsers() {
+        return userService.getAllUsers();
     }
 }

@@ -1,20 +1,17 @@
 package com.anhmt.bff_service.api.booking.request;
 
-import jakarta.annotation.Nonnull;
-import lombok.Builder;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.UUID;
 
 @Getter
 @Setter
-@Builder
-public class BookingRoomCreationRequest {
-
-    @Nonnull
+@AllArgsConstructor
+@NoArgsConstructor
+public class BookingRoomCreationInput {
     private UUID userId;
-
-    @Nonnull
     private UUID roomId;
 }

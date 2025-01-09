@@ -1,30 +1,31 @@
 package com.anhmt.bff_service.api.room;
 
-import com.anhmt.bff_service.api.booking.response.BookingCreationResponse;
-import com.anhmt.bff_service.api.room.model.FetchingAllRoomResponse;
-import com.anhmt.bff_service.api.room.model.RoomCreationReq;
+import com.anhmt.bff_service.api.room.input.RoomCreationInput;
+import com.anhmt.bff_service.api.room.output.RoomOutput;
 import com.anhmt.bff_service.services.RoomService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.graphql.data.method.annotation.Argument;
+import org.springframework.graphql.data.method.annotation.MutationMapping;
+import org.springframework.graphql.data.method.annotation.QueryMapping;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.stereotype.Controller;
 
 import java.util.List;
 
-@RestController
+@Controller
 @RequiredArgsConstructor
-@RequestMapping("api/v1/rooms")
 public class RoomController {
 
     private final RoomService roomService;
 
-    @PostMapping
-    public ResponseEntity<BookingCreationResponse> createRoom(@RequestBody RoomCreationReq roomCreationReq) {
-        roomService.createNewRoom(roomCreationReq);
-        return ResponseEntity.noContent().build();
+    @QueryMapping
+    public List<RoomOutput> fetchAllRooms() {
+        return roomService.fetchAllRooms();
     }
 
-    @GetMapping
-    public ResponseEntity<List<FetchingAllRoomResponse>> fetchAllRooms() {
-        return ResponseEntity.ok(roomService.fetchAllRoom());
+    @MutationMapping
+    public ResponseEntity<?> createRoom(@Argument RoomCreationInput roomCreationInput) {
+        roomService.createNewRoom(roomCreationInput);
+        return ResponseEntity.noContent().build();
     }
 }

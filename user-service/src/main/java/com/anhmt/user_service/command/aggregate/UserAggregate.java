@@ -34,8 +34,7 @@ public class UserAggregate {
     private String password;
 
     @CommandHandler
-    @CreationPolicy(AggregateCreationPolicy.CREATE_IF_MISSING)
-    public void handle(final UserCreationCommand userCreationCommand) {
+    public UserAggregate(final UserCreationCommand userCreationCommand) {
         UserCreationEvent userCreationEvent = UserEventMapper.INSTANCE.toUserCreationEvent(userCreationCommand);
         AggregateLifecycle.apply(userCreationEvent);
     }

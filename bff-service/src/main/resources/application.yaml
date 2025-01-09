@@ -4,13 +4,20 @@ server:
 spring:
   application:
     name: bff-service
+  graphql:
+    graphiql:
+      enabled: true
+      path: /graphiql
   kafka:
     partition:
       room: 2
+      booking-room: 2
     replication:
       room: 2 #2 kafka brokers
+      booking-room: 2
     topic:
       room: room_topic
+      booking-room: booking_room_topic
     bootstrap-servers:
       - localhost:29092
       - localhost:29093

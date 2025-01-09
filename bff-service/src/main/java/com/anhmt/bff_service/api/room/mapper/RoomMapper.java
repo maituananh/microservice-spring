@@ -1,6 +1,6 @@
 package com.anhmt.bff_service.api.room.mapper;
 
-import com.anhmt.bff_service.api.room.model.FetchingAllRoomResponse;
+import com.anhmt.bff_service.api.room.output.RoomOutput;
 import com.anhmt.bff_service.domain.Room;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
@@ -12,5 +12,5 @@ public interface RoomMapper {
 
     RoomMapper INSTANCE = Mappers.getMapper(RoomMapper.class);
 
-    List<FetchingAllRoomResponse> toFetchingAllRoomResponse(List<Room> rooms);
+    List<RoomOutput> toFetchingAllRoomResponse(List<Room> rooms);
 }
