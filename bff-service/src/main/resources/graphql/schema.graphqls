@@ -22,6 +22,11 @@ input UserUpdatingInput {
     email: String!
 }
 
+input UserLoginInput {
+    username: String!,
+    password: String!
+}
+
 type User {
     id: ID!,
     username: String!,
@@ -39,6 +44,7 @@ type Query {
 type Mutation {
     createBooking(bookingRoomCreationInput: BookingRoomCreationInput!): String!
 
+    token(userLoginInput: UserLoginInput): String!
     createUser(userCreationInput: UserCreationInput!): ID!
     deleteUserById(id: ID!): ID!
     updateUserById(userUpdatingInput: UserUpdatingInput!): ID!

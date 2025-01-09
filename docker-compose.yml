@@ -82,46 +82,46 @@ services:
 
 # ==== START KEYCLOAK ====
 # http://localhost:7080/admin
-#  postgres:
-#    image: postgres:16.2
-#    volumes:
-#      - postgres_data:/var/lib/postgresql/data
-#    environment:
-#      POSTGRES_DB: keycloak_db
-#      POSTGRES_USER: keycloak_db_user
-#      POSTGRES_PASSWORD: keycloak_db_user_password
-#    networks:
-#      - keycloak_network
-#
-#  keycloak:
-#    image: quay.io/keycloak/keycloak:24.0
-#    environment:
-#      KC_HOSTNAME: localhost
-#      KC_HOSTNAME_PORT: 7080
-#      KC_HOSTNAME_STRICT_BACKCHANNEL: "true"
-#      KC_HTTP_ENABLED: "true"
-#      KC_HOSTNAME_STRICT_HTTPS: "false"
-#      KEYCLOAK_ADMIN: admin
-#      KEYCLOAK_ADMIN_PASSWORD: admin
-#      KC_HEALTH_ENABLED: "true"
-#      KC_LOG_LEVEL: info
-#      KC_DB: postgres
-#      KC_DB_URL: jdbc:postgresql://postgres/keycloak_db
-#      KC_DB_USERNAME: keycloak_db_user
-#      KC_DB_PASSWORD: keycloak_db_user_password
-#    healthcheck:
-#      test: ["CMD", "curl", "-f", "http://localhost:7080/health/ready"]
-#      interval: 15s
-#      timeout: 2s
-#      retries: 15
-#    command: ["start-dev", "--http-port", "7080", "--https-port", "7443"]
-#    ports:
-#      - "7080:7080"
-#      - "7443:7443"
-#    networks:
-#      - keycloak_network
-#    depends_on:
-#      - postgres
+  postgres:
+    image: postgres:16.2
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_DB: keycloak_db
+      POSTGRES_USER: keycloak_db_user
+      POSTGRES_PASSWORD: keycloak_db_user_password
+    networks:
+      - keycloak_network
+
+  keycloak:
+    image: quay.io/keycloak/keycloak:24.0
+    environment:
+      KC_HOSTNAME: localhost
+      KC_HOSTNAME_PORT: 7080
+      KC_HOSTNAME_STRICT_BACKCHANNEL: "true"
+      KC_HTTP_ENABLED: "true"
+      KC_HOSTNAME_STRICT_HTTPS: "false"
+      KEYCLOAK_ADMIN: admin
+      KEYCLOAK_ADMIN_PASSWORD: admin
+      KC_HEALTH_ENABLED: "true"
+      KC_LOG_LEVEL: info
+      KC_DB: postgres
+      KC_DB_URL: jdbc:postgresql://postgres/keycloak_db
+      KC_DB_USERNAME: keycloak_db_user
+      KC_DB_PASSWORD: keycloak_db_user_password
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:7080/health/ready"]
+      interval: 15s
+      timeout: 2s
+      retries: 15
+    command: ["start-dev", "--http-port", "7080", "--https-port", "7443"]
+    ports:
+      - "7080:7080"
+      - "7443:7443"
+    networks:
+      - keycloak_network
+    depends_on:
+      - postgres
 # ==== END KEYCLOAK ==== 
 
 
@@ -133,5 +133,5 @@ volumes:
 networks:
   kafka-net:
     driver: bridge
-#  keycloak_network:
-#    driver: bridge
+  keycloak_network:
+    driver: bridge

@@ -1,17 +1,15 @@
-package com.anhmt.user_service.query.queries;
+package com.anhmt.bff_service.api.user.input;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.UUID;
-
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
-public class UserFetchingAllQuery {
-    private UUID id;
+@AllArgsConstructor
+public class UserLoginInput {
     private String username;
+    private String password;
 }

@@ -1,4 +1,4 @@
-package com.anhmt.user_service.query.api.res;
+package com.anhmt.user_service.query.queries;
 
 import lombok.*;
 
@@ -7,9 +7,9 @@ import java.util.UUID;
 @Getter
 @Setter
 @Builder
-@NoArgsConstructor
 @AllArgsConstructor
-public class UserDetailRes {
+@NoArgsConstructor
+public class UserQuery {
     private UUID id;
     private String username;
 }

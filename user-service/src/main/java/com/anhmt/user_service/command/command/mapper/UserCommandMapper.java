@@ -7,11 +7,12 @@ import com.anhmt.user_service.command.command.UserDeletingCommand;
 import com.anhmt.user_service.command.command.UserUpdatingCommand;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import org.mapstruct.ReportingPolicy;
 import org.mapstruct.factory.Mappers;
 
 import java.util.UUID;
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface UserCommandMapper {
     UserCommandMapper INSTANCE = Mappers.getMapper(UserCommandMapper.class);
 

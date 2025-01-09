@@ -1,17 +1,14 @@
-package com.anhmt.user_service.query.queries;
+package com.anhmt.user_service.client.keycloak.model.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.UUID;
-
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserDetailQuery {
-    private UUID id;
-    private String username;
+public class TokenResponse {
+    private String accessToken;
 }

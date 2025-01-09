@@ -27,11 +27,12 @@ ext {
     set('springCloudVersion', "2024.0.0")
     set('mysqlConnector', "9.1.0")
     set('mapstructVersion', "1.6.3")
-    set('projectlombok', "1.18.30")
     set('lombokMapstructBinding', "0.2.0")
+    set('projectlombok', "1.18.36")
 }
 
 dependencies {
+    // web
     implementation 'org.springframework.boot:spring-boot-starter-web'
 
     // AXON FRAMEWORK
