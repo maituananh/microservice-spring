@@ -1,8 +1,8 @@
 package com.anhmt.user_service.query.projection.mapper;
 
 import com.anhmt.user_service.domain.User;
-import com.anhmt.user_service.query.api.res.UserFetchingAllRes;
-import com.anhmt.user_service.query.queries.UserFetchingAllQuery;
+import com.anhmt.user_service.query.api.response.UserQueryResponse;
+import com.anhmt.user_service.query.queries.UserQuery;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
@@ -13,8 +13,7 @@ public interface UserProjectionMapper {
 
     UserProjectionMapper INSTANCE = Mappers.getMapper(UserProjectionMapper.class);
 
-    List<UserFetchingAllQuery> toUserFetchingAllQueryList(List<User> users);
+    List<UserQueryResponse> toUserQueryResponseList(List<User> users);
 
-    List<UserFetchingAllRes> toUserFetchingAllResList(List<User> users);
-
+    UserQueryResponse toUserQueryResponse(User user);
 }

@@ -38,4 +38,8 @@ public class UserAdapter {
     public UUID deleteUserById(final UUID id) {
         return userClient.deleteUserById(id);
     }
+
+    public void login(final User user) {
+        userClient.login(UserAdapterMapper.INSTANCE.toUserLoginClientRequest(user));
+    }
 }

@@ -1,4 +1,4 @@
-package com.anhmt.user_service.query.api.res;
+package com.anhmt.user_service.query.api.response;
 
 import lombok.*;
 
@@ -9,7 +9,7 @@ import java.util.UUID;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserFetchingAllRes {
+public class UserQueryResponse {
     private UUID id;
     private String username;
 }

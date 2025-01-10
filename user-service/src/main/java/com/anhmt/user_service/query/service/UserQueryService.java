@@ -1,9 +1,8 @@
 package com.anhmt.user_service.query.service;
 
-import com.anhmt.user_service.query.api.res.UserDetailRes;
-import com.anhmt.user_service.query.api.res.UserFetchingAllRes;
-import com.anhmt.user_service.query.queries.UserDetailQuery;
-import com.anhmt.user_service.query.queries.UserFetchingAllQuery;
+import com.anhmt.user_service.query.api.response.UserQueryResponse;
+import com.anhmt.user_service.query.queries.UserAllQuery;
+import com.anhmt.user_service.query.queries.UserQuery;
 import lombok.RequiredArgsConstructor;
 import org.axonframework.messaging.responsetypes.ResponseTypes;
 import org.axonframework.queryhandling.QueryGateway;
@@ -18,17 +17,13 @@ public class UserQueryService {
 
     private final QueryGateway queryGateway;
 
-    public List<UserFetchingAllRes> getAll() {
-        UserFetchingAllQuery userFetchingAllQuery = new UserFetchingAllQuery();
-        return queryGateway
-                .query(userFetchingAllQuery, ResponseTypes.multipleInstancesOf(UserFetchingAllRes.class))
+    public List<UserQueryResponse> getAll() {
+        return queryGateway.query(new UserAllQuery(), ResponseTypes.multipleInstancesOf(UserQueryResponse.class))
                 .join();
     }
 
-    public UserDetailRes getUserDetail(final UUID id) {
-        UserDetailQuery userDetailQuery = new UserDetailQuery();
-        return queryGateway
-                .query(userDetailQuery, ResponseTypes.instanceOf(UserDetailRes.class))
+    public UserQueryResponse getUserDetail(final UUID id) {
+        return queryGateway.query(UserQuery.builder().id(id).build(), ResponseTypes.instanceOf(UserQueryResponse.class))
                 .join();
     }
 }

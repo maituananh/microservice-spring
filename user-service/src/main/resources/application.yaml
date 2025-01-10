@@ -51,8 +51,9 @@ axon:
     servers: localhost
 
 client:
-  keycloak:
-    base-url: ""
+  keycloak-client:
+    name: keycloak-client
+    url: localhost:7080
 
 server:
   port: 8082

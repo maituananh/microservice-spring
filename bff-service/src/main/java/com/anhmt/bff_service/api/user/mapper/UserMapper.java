@@ -1,6 +1,7 @@
 package com.anhmt.bff_service.api.user.mapper;
 
 import com.anhmt.bff_service.api.user.input.UserCreationInput;
+import com.anhmt.bff_service.api.user.input.UserLoginInput;
 import com.anhmt.bff_service.api.user.input.UserUpdatingInput;
 import com.anhmt.bff_service.api.user.output.UserCreationOutput;
 import com.anhmt.bff_service.api.user.output.UserOutput;
@@ -22,4 +23,6 @@ public interface UserMapper {
     UserCreationOutput toUserCreationOutput(User user);
 
     List<UserOutput> toUsersOutput(List<User> users);
+
+    User toUser(UserLoginInput userLoginInput);
 }
