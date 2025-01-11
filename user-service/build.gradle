@@ -32,8 +32,11 @@ ext {
 }
 
 dependencies {
-    // web
+    // Web
     implementation 'org.springframework.boot:spring-boot-starter-web'
+
+    // Redis
+    implementation 'org.springframework.boot:spring-boot-starter-data-redis'
 
     // AXON FRAMEWORK
     implementation 'org.axonframework:axon-spring-boot-starter:4.9.1'
