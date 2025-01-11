@@ -1,7 +1,7 @@
 package com.anhmt.user_service.repository;
 
 import com.anhmt.user_service.domain.User;
-import com.anhmt.user_service.presenter.entities.UserEntity;
+import com.anhmt.user_service.persistence.entities.UserEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

@@ -1,7 +1,7 @@
 package com.anhmt.user_service.query.projection;
 
 import com.anhmt.user_service.domain.User;
-import com.anhmt.user_service.presenter.UserStore;
+import com.anhmt.user_service.persistence.UserStore;
 import com.anhmt.user_service.query.api.response.UserQueryResponse;
 import com.anhmt.user_service.query.projection.mapper.UserProjectionMapper;
 import com.anhmt.user_service.query.queries.UserAllQuery;

@@ -10,5 +10,11 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class TokenResponse {
-    private String accessToken;
+    private String access_token;
+    private Long expires_in;
+    private Long refresh_expires_in;
+    private String refresh_token;
+    private String token_type;
+    private String id_token;
+    private String scope;
 }

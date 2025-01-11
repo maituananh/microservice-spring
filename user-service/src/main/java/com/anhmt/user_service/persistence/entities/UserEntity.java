@@ -1,4 +1,4 @@
-package com.anhmt.user_service.presenter.entities;
+package com.anhmt.user_service.persistence.entities;
 
 
 import jakarta.persistence.Column;

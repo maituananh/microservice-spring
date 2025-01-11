@@ -64,11 +64,11 @@ axon:
 client:
   keycloak-client:
     name: keycloak
-    realms-name: mcs-spring
+    realms-name: microservice-spring-learning
     url: localhost:7080
     issuer-uri: ${client.keycloak-client.url}/realms/${client.keycloak-client.realms-name}
-    client-id: keycloak-client
-    client-secret: wB7pUro0lK6ZUCrKyPpfW9kNiyWTa612
+    client-id: microservice-spring
+    client-secret: 2QcZaz2fQcpSLLyHhzjbpa4IgmV6UJCQ
     scope: openid
     grant-type: password
 

@@ -1,6 +1,6 @@
 package com.anhmt.user_service.repository;
 
-import com.anhmt.user_service.presenter.entities.UserTokenEntity;
+import com.anhmt.user_service.persistence.entities.UserTokenEntity;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 

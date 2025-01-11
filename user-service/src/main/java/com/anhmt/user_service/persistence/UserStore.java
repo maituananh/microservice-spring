@@ -1,7 +1,7 @@
-package com.anhmt.user_service.presenter;
+package com.anhmt.user_service.persistence;
 
 import com.anhmt.user_service.domain.User;
-import com.anhmt.user_service.presenter.mapper.UserEntityMapper;
+import com.anhmt.user_service.persistence.mapper.UserEntityMapper;
 import com.anhmt.user_service.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

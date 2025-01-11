@@ -4,7 +4,7 @@ import com.anhmt.user_service.command.event.model.UserCreationEvent;
 import com.anhmt.user_service.command.event.model.UserDeletingEvent;
 import com.anhmt.user_service.command.event.model.UserUpdatingEvent;
 import com.anhmt.user_service.domain.User;
-import com.anhmt.user_service.presenter.UserStore;
+import com.anhmt.user_service.persistence.UserStore;
 import lombok.RequiredArgsConstructor;
 import org.axonframework.eventhandling.EventHandler;
 import org.springframework.stereotype.Component;

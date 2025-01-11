@@ -2,7 +2,6 @@ package com.anhmt.user_service.query.service;
 
 import com.anhmt.user_service.query.api.request.UserLoginRequest;
 import com.anhmt.user_service.query.api.response.UserLoginQueryResponse;
-import com.anhmt.user_service.query.api.response.UserQueryResponse;
 import com.anhmt.user_service.query.queries.UserLoginQuery;
 import lombok.RequiredArgsConstructor;
 import org.axonframework.messaging.responsetypes.ResponseTypes;
