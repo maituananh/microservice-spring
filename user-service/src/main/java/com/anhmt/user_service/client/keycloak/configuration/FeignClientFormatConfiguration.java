@@ -24,48 +24,48 @@ import org.springframework.http.converter.json.MappingJackson2HttpMessageConvert
 
 import java.util.Collections;
 
-@Configuration(proxyBeanMethods = false)
+@Configuration
 public class FeignClientFormatConfiguration {
 
     @Bean
     Logger.Level feignLoggerLevel() {
-        return Logger.Level.valueOf("FULL");
+        return Logger.Level.FULL;
     }
 
-    @Bean
-    public Encoder feignEncoder() {
-        HttpMessageConverter<Object> jacksonConverter =
-                new MappingJackson2HttpMessageConverter(customerEncoder());
-        ObjectFactory<HttpMessageConverters> messageConverters =
-                () -> new HttpMessageConverters(jacksonConverter);
-        return new SpringEncoder(messageConverters);
-    }
+//    @Bean
+//    public Encoder feignEncoder() {
+//        HttpMessageConverter<Object> jacksonConverter =
+//                new MappingJackson2HttpMessageConverter(customerEncoder());
+//        ObjectFactory<HttpMessageConverters> messageConverters =
+//                () -> new HttpMessageConverters(jacksonConverter);
+//        return new SpringEncoder(messageConverters);
+//    }
 
-    @Bean
-    public Decoder feignDecoder(ObjectProvider<HttpMessageConverterCustomizer> customizers) {
-        HttpMessageConverter<Object> jacksonConverter =
-                new MappingJackson2HttpMessageConverter(customObjectMapper());
-        ObjectFactory<HttpMessageConverters> messageConverters =
-                () -> new HttpMessageConverters(false, Collections.singleton(jacksonConverter));
-        return new ResponseEntityDecoder(new SpringDecoder(messageConverters, customizers));
-    }
+//    @Bean
+//    public Decoder feignDecoder(ObjectProvider<HttpMessageConverterCustomizer> customizers) {
+//        HttpMessageConverter<Object> jacksonConverter =
+//                new MappingJackson2HttpMessageConverter(customObjectMapper());
+//        ObjectFactory<HttpMessageConverters> messageConverters =
+//                () -> new HttpMessageConverters(false, Collections.singleton(jacksonConverter));
+//        return new ResponseEntityDecoder(new SpringDecoder(messageConverters, customizers));
+//    }
+//
+//    public ObjectMapper customObjectMapper() {
+//        ObjectMapper objectMapper = new ObjectMapper();
+//        objectMapper.setPropertyNamingStrategy(PropertyNamingStrategies.SNAKE_CASE);
+//        objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+//        return objectMapper;
+//    }
 
-    public ObjectMapper customObjectMapper() {
-        ObjectMapper objectMapper = new ObjectMapper();
-        objectMapper.setPropertyNamingStrategy(PropertyNamingStrategies.SNAKE_CASE);
-        objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-        return objectMapper;
-    }
-
-    private ObjectMapper customerEncoder() {
-        return Jackson2ObjectMapperBuilder.json()
-                .modules(new JavaTimeModule())
-                .featuresToDisable(
-                        SerializationFeature.WRITE_DATES_AS_TIMESTAMPS,
-                        DeserializationFeature.FAIL_ON_IGNORED_PROPERTIES)
-                .propertyNamingStrategy(PropertyNamingStrategies.UPPER_CAMEL_CASE)
-                .serializationInclusion(JsonInclude.Include.NON_NULL) // ignore null fields
-                .featuresToDisable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
-                .build();
-    }
+//    private ObjectMapper customerEncoder() {
+//        return Jackson2ObjectMapperBuilder.json()
+//                                          .modules(new JavaTimeModule())
+//                                          .featuresToDisable(
+//                                                  SerializationFeature.WRITE_DATES_AS_TIMESTAMPS,
+//                                                  DeserializationFeature.FAIL_ON_IGNORED_PROPERTIES)
+//                                          .propertyNamingStrategy(PropertyNamingStrategies.UPPER_CAMEL_CASE)
+//                                          .serializationInclusion(JsonInclude.Include.NON_NULL) // ignore null fields
+//                                          .featuresToDisable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
+//                                          .build();
+//    }
 }

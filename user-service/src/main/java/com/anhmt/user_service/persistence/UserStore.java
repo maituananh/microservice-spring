@@ -24,9 +24,9 @@ public class UserStore {
         return UserEntityMapper.INSTANCE.toUsers(userRepository.findAll());
     }
 
-    public User save(final User user) {
+    public void save(final User user) {
         var userEntity = UserEntityMapper.INSTANCE.toUserEntity(user);
-        return UserEntityMapper.INSTANCE.toUser(userRepository.save(userEntity));
+        userRepository.save(userEntity);
     }
 
     public Optional<User> getById(final UUID id) {

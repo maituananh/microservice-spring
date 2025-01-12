@@ -17,7 +17,7 @@ public class AuthProjection {
 
     @QueryHandler
     public UserLoginQueryResponse handle(final UserLoginQuery userLoginQuery) {
-        Token token = keyCloakAdapter.getToken(userLoginQuery);
+        Token token = keyCloakAdapter.getTokenByUsernameAndPassword(userLoginQuery);
         return AuthProjectionMapper.INSTANCE.toUserLoginQueryResponse(token);
     }
 }
