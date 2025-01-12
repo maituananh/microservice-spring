@@ -1,6 +1,17 @@
 spring:
   application:
     name: user-service
+
+  cache:
+    type: redis
+
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: ${client.keycloak-client.issuer-uri}
+          jwk-set-uri: ${client.keycloak-client.issuer-uri}/protocol/openid-connect/certs
+
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/mcs-user?createDatabaseIfNotExist=true&allowPublicKeyRetrieval=true&useSSL=false&useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
@@ -52,8 +63,14 @@ axon:
 
 client:
   keycloak-client:
-    name: keycloak-client
+    name: keycloak
+    realms-name: microservice-spring-learning
     url: localhost:7080
+    issuer-uri: ${client.keycloak-client.url}/realms/${client.keycloak-client.realms-name}
+    client-id: microservice-spring
+    client-secret: 2QcZaz2fQcpSLLyHhzjbpa4IgmV6UJCQ
+    scope: openid
+    grant-type: password
 
 server:
   port: 8082

@@ -4,7 +4,7 @@ import com.anhmt.user_service.command.event.model.UserCreationEvent;
 import com.anhmt.user_service.command.event.model.UserDeletingEvent;
 import com.anhmt.user_service.command.event.model.UserUpdatingEvent;
 import com.anhmt.user_service.domain.User;
-import com.anhmt.user_service.repository.user.UserRepository;
+import com.anhmt.user_service.persistence.UserStore;
 import lombok.RequiredArgsConstructor;
 import org.axonframework.eventhandling.EventHandler;
 import org.springframework.stereotype.Component;
@@ -15,7 +15,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class UserEventsHandler {
 
-    private final UserRepository userRepository;
+    private final UserStore userStore;
 
     @EventHandler
     public void on(UserCreationEvent event) {
@@ -23,12 +23,12 @@ public class UserEventsHandler {
         user.setId(event.getId());
         user.setUsername(event.getName());
 
-        userRepository.save(user);
+        userStore.save(user);
     }
 
     @EventHandler
     public void on(UserUpdatingEvent event) {
-        Optional<User> optionalUser = userRepository.findById(event.getId());
+        Optional<User> optionalUser = userStore.getById(event.getId());
 
         if (optionalUser.isEmpty()) {
             return;
@@ -38,11 +38,11 @@ public class UserEventsHandler {
         user.setId(event.getId());
         user.setUsername(event.getName());
 
-        userRepository.save(user);
+        userStore.save(user);
     }
 
     @EventHandler
     public void on(UserDeletingEvent event) {
-        userRepository.deleteById(event.getId());
+        userStore.deleteById(event.getId());
     }
 }
