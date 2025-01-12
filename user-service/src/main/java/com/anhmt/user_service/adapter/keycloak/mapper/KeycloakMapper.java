@@ -1,6 +1,6 @@
 package com.anhmt.user_service.adapter.keycloak.mapper;
 
-import com.anhmt.user_service.client.keycloak.model.response.TokenResponse;
+import com.anhmt.user_service.client.keycloak.model.response.TokenClientResponse;
 import com.anhmt.user_service.domain.Token;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -17,5 +17,5 @@ public interface KeycloakMapper {
     @Mapping(target = "refreshToken", source = "refresh_token")
     @Mapping(target = "tokenType", source = "token_type")
     @Mapping(target = "idToken", source = "id_token")
-    Token toToken(TokenResponse tokenResponse);
+    Token toToken(TokenClientResponse tokenClientResponse);
 }

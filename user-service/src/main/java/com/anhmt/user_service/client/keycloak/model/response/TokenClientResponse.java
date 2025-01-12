@@ -9,7 +9,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class TokenResponse {
+public class TokenClientResponse {
     private String access_token;
     private Long expires_in;
     private Long refresh_expires_in;

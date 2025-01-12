@@ -1,5 +1,7 @@
 package com.anhmt.user_service.command.event;
 
+import com.anhmt.user_service.adapter.keycloak.KeycloakAdapter;
+import com.anhmt.user_service.command.event.mapper.UserEventMapper;
 import com.anhmt.user_service.command.event.model.UserCreationEvent;
 import com.anhmt.user_service.command.event.model.UserDeletingEvent;
 import com.anhmt.user_service.command.event.model.UserUpdatingEvent;
@@ -15,15 +17,17 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class UserEventsHandler {
 
+    private final KeycloakAdapter keycloakAdapter;
     private final UserStore userStore;
 
     @EventHandler
     public void on(UserCreationEvent event) {
-        User user = new User();
-        user.setId(event.getId());
-        user.setUsername(event.getName());
+        var user = UserEventMapper.INSTANCE.toUser(event);
+        keycloakAdapter.createUser(user);
 
-        userStore.save(user);
+//        if (userCreated) {
+//            userStore.save(user);
+//        }
     }
 
     @EventHandler
