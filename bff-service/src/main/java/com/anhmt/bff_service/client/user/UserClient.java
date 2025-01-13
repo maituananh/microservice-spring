@@ -4,8 +4,8 @@ import com.anhmt.bff_service.client.configuration.FeignConfig;
 import com.anhmt.bff_service.client.user.request.UserCreationClientRequest;
 import com.anhmt.bff_service.client.user.request.UserLoginClientRequest;
 import com.anhmt.bff_service.client.user.request.UserUpdatingClientRequest;
+import com.anhmt.bff_service.client.user.response.TokenClientResponse;
 import com.anhmt.bff_service.client.user.response.UserClientResponse;
-import org.mapstruct.ap.internal.util.Strings;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.*;
 
@@ -35,5 +35,5 @@ public interface UserClient {
                         @RequestBody UserUpdatingClientRequest userUpdatingClientRequest);
 
     @PostMapping(USER_AUTH + "/token")
-    void login(@RequestBody UserLoginClientRequest userLoginClientRequest);
+    TokenClientResponse tokenByUsernameAndPassword(@RequestBody UserLoginClientRequest userLoginClientRequest);
 }

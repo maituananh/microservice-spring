@@ -17,7 +17,7 @@ public class AuthQueryController {
 
     private final AuthService authService;
 
-    @PostMapping
+    @PostMapping("/token")
     public ResponseEntity<UserLoginQueryResponse> token(@RequestBody UserLoginRequest userLoginRequest) {
         return ResponseEntity.ok(authService.getToken(userLoginRequest));
     }
