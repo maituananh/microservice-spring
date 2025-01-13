@@ -32,6 +32,8 @@ public class UserAggregate {
     private String name;
     private String email;
     private String password;
+    private String firstName;
+    private String lastName;
 
     @CommandHandler
     public UserAggregate(final UserCreationCommand userCreationCommand) {
@@ -59,6 +61,8 @@ public class UserAggregate {
         this.name = event.getName();
         this.email = event.getEmail();
         this.password = event.getPassword();
+        this.firstName = event.getFirstName();
+        this.lastName = event.getLastName();
     }
 
     @EventSourcingHandler
@@ -66,6 +70,8 @@ public class UserAggregate {
         this.id = event.getId();
         this.name = event.getName();
         this.email = event.getEmail();
+        this.firstName = event.getFirstName();
+        this.lastName = event.getLastName();
     }
 
     @EventSourcingHandler

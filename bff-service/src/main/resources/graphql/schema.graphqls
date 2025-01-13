@@ -9,6 +9,21 @@ type Room {
     name: String
 }
 
+# ==== Auth
+input TokenInput {
+    username: String!,
+    password: String!,
+}
+
+type TokenOutput {
+    accessToken: String!,
+    expiresIn: Int!,
+    refreshExpiresIn: Int!,
+    refreshToken: String!,
+    tokenType: String!,
+    scope: String!
+}
+
 # ==== USER
 input UserCreationInput {
     username: String!,
@@ -20,11 +35,6 @@ input UserUpdatingInput {
     id: ID!,
     username: String!,
     email: String!
-}
-
-input UserLoginInput {
-    username: String!,
-    password: String!
 }
 
 type User {
@@ -44,7 +54,7 @@ type Query {
 type Mutation {
     createBooking(bookingRoomCreationInput: BookingRoomCreationInput!): String!
 
-    token(userLoginInput: UserLoginInput): String!
+    token(tokenInput: TokenInput): TokenOutput!
     createUser(userCreationInput: UserCreationInput!): ID!
     deleteUserById(id: ID!): ID!
     updateUserById(userUpdatingInput: UserUpdatingInput!): ID!

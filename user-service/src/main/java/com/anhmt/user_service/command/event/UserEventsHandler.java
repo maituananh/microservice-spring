@@ -23,11 +23,10 @@ public class UserEventsHandler {
     @EventHandler
     public void on(UserCreationEvent event) {
         var user = UserEventMapper.INSTANCE.toUser(event);
-        keycloakAdapter.createUser(user);
 
-//        if (userCreated) {
-//            userStore.save(user);
-//        }
+        if (keycloakAdapter.createUser(user)) {
+            userStore.save(user);
+        }
     }
 
     @EventHandler
