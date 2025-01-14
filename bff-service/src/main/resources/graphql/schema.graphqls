@@ -37,7 +37,7 @@ input UserUpdatingInput {
     email: String!
 }
 
-type User {
+type UserOutput {
     id: ID!,
     username: String!,
     email: String
@@ -47,7 +47,8 @@ type User {
 type Query {
     fetchAllRooms: [Room!]
 
-    fetchAllUsers: [User!]
+    fetchAllUsers: [UserOutput!]
+    getUserById(id: ID): UserOutput
 }
 
 # ==== MUTATION ====

@@ -26,6 +26,8 @@ public interface UserMapper {
 
     List<UserOutput> toUsersOutput(List<User> users);
 
+    UserOutput toUserOutput(User user);
+
     User toUser(TokenInput tokenInput);
 
     TokenOutput toTokenOutput(Token token);

@@ -38,4 +38,9 @@ public class UserController {
     public List<UserOutput> fetchAllUsers() {
         return userService.getAllUsers();
     }
+
+    @QueryMapping
+    public UserOutput getUserById(@Argument UUID id) {
+        return userService.getUserById(id);
+    }
 }
