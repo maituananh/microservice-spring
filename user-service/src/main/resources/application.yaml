@@ -71,3 +71,9 @@ client:
 
 server:
   port: 8082
+
+logging:
+  level:
+    root: "info"
+    org.springframework.web: "debug"
+    org.hibernate: "error"

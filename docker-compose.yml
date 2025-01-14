@@ -122,8 +122,19 @@ services:
       - keycloak_network
     depends_on:
       - postgres
-# ==== END KEYCLOAK ==== 
+# ==== END KEYCLOAK ====
 
+# ==== START REDIS ====
+  redis:
+    image: 'bitnami/redis:latest'
+    networks:
+      - redis_network
+    ports:
+      - "6379:6379"
+    environment:
+      - REDIS_PASSWORD=admin
+      - REDIS_DATABASE=mcs-spring
+# ==== END REDIS ====
 
 volumes:
   mysql-data:
@@ -134,4 +145,6 @@ networks:
   kafka-net:
     driver: bridge
   keycloak_network:
+    driver: bridge
+  redis_network:
     driver: bridge

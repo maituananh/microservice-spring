@@ -27,6 +27,8 @@ ext {
 	set('springCloudVersion', "2024.0.0")
 	set('mapstructVersion', "1.6.3")
 	set('lombokMapstructBindingVersion', "0.2.0")
+	set('commonsPool2Version', "2.12.0")
+	set('jedisVersion', "5.2.0")
 }
 
 dependencies {
@@ -44,6 +46,9 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-graphql'
 
 	// Redis
+	implementation "org.apache.commons:commons-pool2:${commonsPool2Version}"
+	implementation "redis.clients:jedis:${jedisVersion}"
+
 	implementation 'org.springframework.boot:spring-boot-starter-data-redis'
 	implementation 'org.springframework.boot:spring-boot-starter-cache'
 

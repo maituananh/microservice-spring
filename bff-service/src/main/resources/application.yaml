@@ -4,12 +4,15 @@ server:
 spring:
   application:
     name: bff-service
+
   cache:
     type: redis
+
   graphql:
     graphiql:
       enabled: true
       path: /graphiql
+
   kafka:
     partition:
       room: 2
@@ -34,6 +37,17 @@ spring:
         "enable.idempotence": "true"
         "max.in.flight.requests.per.connection": "5"
 
+  data:
+    redis:
+      host: localhost
+      port: 6379
+      password: admin
+
+  cloud:
+    openfeign:
+      client:
+        decode-slash: true
+
 client:
   user-client:
     name: user-client
@@ -44,3 +58,9 @@ client:
   booking-client:
     name: booking-client
     url: localhost:8083
+
+logging:
+  level:
+    root: "info"
+    org.springframework.web: "debug"
+    org.hibernate: "error"

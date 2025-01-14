@@ -8,6 +8,7 @@ import com.anhmt.bff_service.domain.User;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Component;
 
@@ -30,11 +31,13 @@ public class UserAdapter {
         return UserAdapterMapper.INSTANCE.toUsers(userClient.getAllUsers());
     }
 
+    @Cacheable(value = "users", key = "#user.id", condition = "#user != null")
     public User createUser(final User user) {
         var id = userClient.createNewUser(UserAdapterMapper.INSTANCE.toUserCreationClientRequest(user));
         return UserAdapterMapper.INSTANCE.toUser(id);
     }
 
+    @CachePut(value = "users", key = "#user.id", condition = "#user != null")
     public UUID updateUserById(final User user) {
         return userClient.updateUserById(user.getId(),
                 UserAdapterMapper.INSTANCE.toUserUpdatingClientRequest(user));
