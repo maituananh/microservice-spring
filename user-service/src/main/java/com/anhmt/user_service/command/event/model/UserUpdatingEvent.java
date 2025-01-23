@@ -13,4 +13,6 @@ public class UserUpdatingEvent {
     private UUID id;
     private String name;
     private String email;
+    private String firstName;
+    private String lastName;
 }

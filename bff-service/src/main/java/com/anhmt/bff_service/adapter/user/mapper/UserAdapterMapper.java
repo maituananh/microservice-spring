@@ -3,7 +3,9 @@ package com.anhmt.bff_service.adapter.user.mapper;
 import com.anhmt.bff_service.client.user.request.UserCreationClientRequest;
 import com.anhmt.bff_service.client.user.request.UserLoginClientRequest;
 import com.anhmt.bff_service.client.user.request.UserUpdatingClientRequest;
+import com.anhmt.bff_service.client.user.response.TokenClientResponse;
 import com.anhmt.bff_service.client.user.response.UserClientResponse;
+import com.anhmt.bff_service.domain.Token;
 import com.anhmt.bff_service.domain.User;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
@@ -27,7 +29,7 @@ public interface UserAdapterMapper {
 
     UserUpdatingClientRequest toUserUpdatingClientRequest(User user);
 
-    User toUser(UserCreationClientRequest userCreationClientRequest);
-
     UserLoginClientRequest toUserLoginClientRequest(User user);
+
+    Token toToken(TokenClientResponse tokenClientResponse);
 }

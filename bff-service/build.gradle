@@ -26,12 +26,18 @@ repositories {
 ext {
 	set('springCloudVersion', "2024.0.0")
 	set('mapstructVersion', "1.6.3")
-	set('lombokMapstructBinding', "0.2.0")
+	set('lombokMapstructBindingVersion', "0.2.0")
+	set('commonsPool2Version', "2.12.0")
+	set('jedisVersion', "5.2.0")
 }
 
 dependencies {
 	// web
 	implementation 'org.springframework.boot:spring-boot-starter-web'
+
+	// Security
+//	implementation 'org.springframework.boot:spring-boot-starter-oauth2-resource-server'
+//	implementation 'org.springframework.boot:spring-boot-starter-security'
 
 	//	cloud
 	implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
@@ -39,13 +45,20 @@ dependencies {
 	//	graphql
 	implementation 'org.springframework.boot:spring-boot-starter-graphql'
 
+	// Redis
+	implementation "org.apache.commons:commons-pool2:${commonsPool2Version}"
+	implementation "redis.clients:jedis:${jedisVersion}"
+
+	implementation 'org.springframework.boot:spring-boot-starter-data-redis'
+	implementation 'org.springframework.boot:spring-boot-starter-cache'
+
 	//	kafka
 	implementation 'org.springframework.kafka:spring-kafka'
 
 	// mapstruct
 	implementation "org.mapstruct:mapstruct:${mapstructVersion}"
 	annotationProcessor "org.mapstruct:mapstruct-processor:${mapstructVersion}"
-	annotationProcessor "org.projectlombok:lombok-mapstruct-binding:${lombokMapstructBinding}"
+	annotationProcessor "org.projectlombok:lombok-mapstruct-binding:${lombokMapstructBindingVersion}"
 
 	//	tool
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'

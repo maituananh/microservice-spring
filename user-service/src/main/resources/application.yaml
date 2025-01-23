@@ -2,9 +2,6 @@ spring:
   application:
     name: user-service
 
-  cache:
-    type: redis
-
   security:
     oauth2:
       resourceserver:
@@ -64,13 +61,19 @@ axon:
 client:
   keycloak-client:
     name: keycloak
-    realms-name: microservice-spring-learning
-    url: localhost:7080
+    realms-name: ${REALMS_NAME:microservice-spring-learning}
+    url: http://localhost:7080
     issuer-uri: ${client.keycloak-client.url}/realms/${client.keycloak-client.realms-name}
-    client-id: microservice-spring
-    client-secret: 2QcZaz2fQcpSLLyHhzjbpa4IgmV6UJCQ
+    client-id: ${CLIENT_ID:microservice-spring}
+    client-secret: ${CLIENT_SECRET:2QcZaz2fQcpSLLyHhzjbpa4IgmV6UJCQ}
     scope: openid
     grant-type: password
 
 server:
   port: 8082
+
+logging:
+  level:
+    root: "info"
+    org.springframework.web: "debug"
+    org.hibernate: "error"
